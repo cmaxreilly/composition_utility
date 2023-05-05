@@ -1,4 +1,11 @@
 
+from midiutil.MidiFile import MIDIFile
+
+def main ():
+    # Testing name_to_midi function
+    print(str(name_to_midi("c4")))
+    write_to_midi(["50", "60", "70"], "test.midi")
+
 def name_to_midi(pitch):
     # Dictionary mapping note names to MIDI note numbers
     note_dict = {'c': 0, 'c#': 1, 'd': 2, 'd#': 3, 'e': 4, 'f': 5, 'f#': 6, 'g': 7, 'g#': 8, 'a': 9, 'a#': 10, 'b': 11}
@@ -9,7 +16,6 @@ def name_to_midi(pitch):
     return midi_note
 
 
-from midiutil.MidiFile import MIDIFile
 
 def write_to_midi(pitches, filename):
     # Create a new MIDI file with one track
@@ -18,7 +24,7 @@ def write_to_midi(pitches, filename):
     
     # Set the tempo and time signature
     midi_file.addTempo(track, 0, 120)
-    midi_file.addTimeSignature(track, 0, 4, 2)
+    midi_file.addTimeSignature(track, 0, 4, 2, 24)
     
     # Add the pitches as notes to the MIDI file
     time = 0
@@ -104,7 +110,6 @@ def write_to_lilypond(pitches, filename):
         f.write(input_string)
 
 
-from midiutil.MidiFile import MIDIFile
 
 def write_to_midi(pitches, filename):
     # Create a new MIDI file with one track
@@ -179,3 +184,7 @@ def transpose_to_modes(motive):
             possible_modes[mode] = transposed_motive
     
     return possible_modes
+
+
+if __name__ == "__main__":
+    main()
